@@ -1,6 +1,5 @@
 <template>
   <div class="charts">
-    <!-- <chart title="Second" :passed="second" :total="60" /> -->
     <chart title="Minute" :passed="minute" :total="60" />
     <chart title="Hour" :passed="hour" :total="60 * 60" />
     <chart title="Day" :passed="day" :total="60 * 24" />
@@ -8,6 +7,7 @@
     <chart title="Month" :passed="month" :total="24 * daysInMonth" />
     <chart title="Year" :passed="year" :total="daysInYear" />
     <chart title="Summer Olympics" :passed="daysSinceLastSummerOlympics" :total="daysBetweenSummerOlympics" />
+    <chart title="Winter Olympics" :passed="daysSinceLastWinterOlympics" :total="daysBetweenWinterOlympics" />
     <chart title="Life" :passed="30" :total="90" />
   </div>
 </template>
@@ -23,9 +23,6 @@ export default {
     time: Object,
     daysInMonth: Number,
     daysInYear: Number
-  },
-  data () {
-    return {}
   },
   computed: {
     minute () {
@@ -47,10 +44,16 @@ export default {
       return this.time.dayOfYear()
     },
     daysBetweenSummerOlympics () {
-      return dates.nextOlympics.diff(dates.lastOlympics, 'days', true)
+      return dates.nextSummerOlympics.diff(dates.lastSummerOlympics, 'days', true)
     },
     daysSinceLastSummerOlympics () {
-      return this.time.diff(dates.lastOlympics, 'days', true)
+      return this.time.diff(dates.lastSummerOlympics, 'days', true)
+    },
+    daysBetweenWinterOlympics () {
+      return dates.nextWinterOlympics.diff(dates.lastWinterOlympics, 'days', true)
+    },
+    daysSinceLastWinterOlympics () {
+      return this.time.diff(dates.lastWinterOlympics, 'days', true)
     }
   }
 }
